@@ -3,9 +3,10 @@
 
 #include <stdlib.h>
 
-typedef struct w {
+typedef struct {
     int id;
     int *adj; //sąsiedzi
+    double *adj_weights; //wagi między this a sąsiadem
     int n;
 } wierzcholek_t;
 
@@ -17,8 +18,9 @@ typedef struct {
 // obsługa struktur
 wierzcholek_t new_wierzcholek_t(int id);
 
-void add_adj(wierzcholek_t *w, int id) ;
+void add_adj(wierzcholek_t *w, int id, double weight) ;
 
+wierzcholek_tab new_wierzcholek_tab_s(int size);
 wierzcholek_tab new_wierzcholek_tab();
 
 void add_w_to_tab(wierzcholek_t w, wierzcholek_tab tab);

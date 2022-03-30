@@ -3,7 +3,7 @@
 #include "files.h"
 
 
-wierzcholek_tab read(const char *filename) {
+wierzcholek_tab read_w(const char *filename) {
     FILE *f = fopen(filename, "r");
     if (f == NULL) {
         fprintf(stderr, "graph: Blad przy otwieraniu pliku zrodlowego: %s!\n", filename);

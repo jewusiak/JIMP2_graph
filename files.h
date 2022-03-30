@@ -3,7 +3,8 @@
 
 #include "graph.h"
 
-char *read(const char *filename);
+
+wierzcholek_tab read(const char *filename);
 
 int write(wierzcholek_tab tablica, const char *filename);
 

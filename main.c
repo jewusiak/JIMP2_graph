@@ -5,8 +5,7 @@
 #include "BFS.h"
 
 int main(int argc, char **argv){
-    char *read_text=read("mygraph");
-    wierzcholek_tab graf= text_to_graph(read_text);
+    wierzcholek_tab graf= read("mygraph");
 
     kolejka_t k=new_kolejka_t();
     q_push(&k,2);

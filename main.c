@@ -1,24 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <ctype.h>
 #include <string.h>
-#include "graph.h"
 #include "files.h"
 #include "BFS.h"
 #include "utils.h"
+#include "graph.h"
+#include "path_search.h"
 
 int main(int argc, char **argv) {
 
     int c, i, spojnosc = 0, dijks = 0, gen = 0, id_pocz = -1, id_konc = -1, rows = -1, cols = -1;
     char *err = "";
-    int filename_argv_index = -1;
+    double min_w = 0, max_w = 10;
+    int src_argv_index = -1;
     const char *def_filename = "mygraph";
 
     puts(err);
 
-    if(argc>1)
-        if(strcmp(argv[1], "-h")==0||strcmp(argv[1], "--help")==0) {
+    if (argc > 1)
+        if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0) {
             //TODO: implementacja helpa
 
             printf("Zaimplementować helpa\n");
@@ -40,6 +40,9 @@ int main(int argc, char **argv) {
                 dijks = 1;
                 id_pocz = atoi(argv[++i]);
                 id_konc = atoi(argv[++i]);
+                //wymuszenie spójności
+                spojnosc = 1;
+
 
             } else {
                 err = "Nieprawidlowo zdefiniowane wartosci id_pocz i id_konc jako kolejne parametry po -p lub --path";
@@ -55,9 +58,30 @@ int main(int argc, char **argv) {
                 gen = 1;
                 rows = atoi(argv[++i]);
                 cols = atoi(argv[++i]);
-
+                if (rows <= 0 || cols <= 0) {
+                    err = "Nieprawidlowo zdefiniowane wartosci rows i cols - niedodatnie.";
+                    break;
+                }
             } else {
                 err = "Nieprawidlowo zdefiniowane wartosci rows i cols jako kolejne parametry po -g lub --gen";
+                break;
+            }
+        } else if (strcmp(argv[i], "-w") == 0) {
+            if (i + 2 >= argc) {
+                err = "Nieprawidlowo zdefiniowane wartosci min i max jako kolejne parametry po -w";
+                break;
+            }
+
+            if (is_dec(argv[i + 1]) && is_dec(argv[i + 2])) {
+                gen = 1;
+                min_w = atof(argv[++i]);
+                max_w = atof(argv[++i]);
+                if (rows <= 0 || cols <= 0) {
+                    err = "Nieprawidlowo zdefiniowane wartosci wartosci min i max - niedodatnie.";
+                    break;
+                }
+            } else {
+                err = "Nieprawidlowo zdefiniowane wartosci min i max jako kolejne parametry po -w";
                 break;
             }
         } else if (strcmp(argv[i], "--src") == 0) {
@@ -65,10 +89,10 @@ int main(int argc, char **argv) {
                 err = "Nieprawidlowo zdefiniowana sciezka jako kolejny parametry po --src";
                 break;
             }
-            filename_argv_index = ++i;
+            src_argv_index = ++i;
 
         } else {
-            err="Nieznany argument.";
+            err = "Nieznany argument.";
             break;
         }
     }
@@ -78,26 +102,35 @@ int main(int argc, char **argv) {
         return 8; //TODO: exit-code do sprawozdania
     }
 
+    wierzcholek_tab graf;
+
+    if ((spojnosc || dijks) && !gen && src_argv_index != -1) {
+        //praca na grafie wczytanym (wczytujemy src)
+        graf = read_w(argv[src_argv_index]);
+    } else if (gen && src_argv_index != -1) {
+        //praca na grafie (generujemy graf, zapisujemy do src, pracujemy na nim)
+        graf = gen_graph(rows, cols, min_w, max_w);
+        write_w(graf, argv[src_argv_index]);
+
+    } else {
+        fprintf(stderr, "graph: Nieprawidlowo zdefiniowany tryb pracy. Za malo argumentow.");
+        return 8;
+    }
+
+    int czy_spojny = BFS(graf);
+
+    if (spojnosc)
+        printf("Test spojnosci: %s\n", czy_spojny ? "TAK" : "NIE");
+
+    if (dijks && !czy_spojny) {
+        fprintf(stderr, "graph: Do poprawnego dzialania algorytmu Dijkstry wymagana jest spojnosc grafu.\n");
+        exit(1);
+    }
+
+    if (dijks)
+        write_results(find(graf));
 
 
 
-    printf("czy gen: %d (%d, %d)\nczy spoj: %d\nczy dijkstr: %d (%d -> %d)\nsrc: %s", gen, rows, cols, spojnosc, dijks,
-           id_pocz, id_konc, filename_argv_index == -1 ? def_filename : argv[filename_argv_index]);
 
-    wierzcholek_tab graf = read_w("mygraph");
-
-    kolejka_t k = new_kolejka_t();
-    q_push(&k, 2);
-    q_push(&k, 3);
-    q_push(&k, 4);
-    q_push(&k, 6);
-
-    while (!q_empty(&k))
-        printf("%d\n", q_pop(&k));
-
-    int isc = BFS(graf);
-
-    printf("Czy spojny: %d\n", isc);
-
-    puts("");
 }

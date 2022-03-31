@@ -18,3 +18,16 @@ int is_number(char *supp){
             return 0;
     return 1;
 }
+
+
+/*
+ * Sprawdza czy supp to liczba zmiennoprzecinkowa.
+ * Zwraca  0 - nie, 1 - tak
+ */
+int is_dec(char *supp){
+    int i=0;
+    for(;i<strlen(supp);i++)
+        if(isdigit(supp[i])==0 || supp[i]=='.')
+            return 0;
+    return 1;
+}

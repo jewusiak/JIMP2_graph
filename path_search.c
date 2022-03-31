@@ -21,3 +21,7 @@ void add_s_to_tab(sciezka_t w, sciezka_tab tab){
     tab->sciezki= realloc(tab->sciezki, ++(tab->n) * sizeof *tab->sciezki);
     tab->sciezki[tab->n-1]=w;
 }
+
+sciezka_tab find(wierzcholek_tab tablica){
+    return new_sciezka_tab();
+}

@@ -39,3 +39,6 @@ void add_w_to_tab(wierzcholek_t w, wierzcholek_tab tab) {
     tab->tab[tab->n - 1] = w;
 }
 
+wierzcholek_tab gen_graph(int rows, int cols, double w_min, double w_max){
+    return new_wierzcholek_tab();
+}

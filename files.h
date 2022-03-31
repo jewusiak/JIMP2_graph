@@ -2,10 +2,13 @@
 #define JIMP2_GRAPH_FILES_H
 
 #include "graph.h"
+#include "path_search.h"
 
 
 wierzcholek_tab read_w(const char *filename);
 
-int write_w(wierzcholek_tab tablica, const char *filename);
+void write_w(wierzcholek_tab tablica, const char *filename);
+
+void write_results(sciezka_tab s);
 
 #endif //JIMP2_GRAPH_FILES_H

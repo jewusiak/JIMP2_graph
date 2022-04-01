@@ -47,63 +47,73 @@ double gen_num(double l_num, double h_num){
     return r_num;
 }
 
+int probability(){
+    int r_num;
+    srand(time(NULL));
+    r_num=rand()%100;
+    return r_num;
+}
+
+
 wierzcholek_tab gen_graph(int rows, int cols, double w_min, double w_max){
     int r;
     int c;
     int id_w=0;
+    wierzcholek_tab tablica= new_wierzcholek_tab_s(rows*cols);
     for(r=0;r<rows;r++)
     {
         for(c=0;c<cols;c++)
         {
             wierzcholek_t temp= new_wierzcholek_t(id_w);
-            if(r==0 && c==0) {
-                add_adj(&temp, id_w + 1, gen_num(0, 10));
-                add_adj(&temp, id_w + c, gen_num(0, 10));
+            if(r==0 && c==0 && probability()>1) {
+                add_adj(&temp, id_w + 1, gen_num(w_min, w_max));
+                add_adj(&temp, id_w + c, gen_num(w_min, w_max));
             }
-            if(r==0 && c==cols-1){
-                add_adj(&temp, id_w-1, gen_num(0,10));
-                add_adj(&temp, id_w + c, gen_num(0, 10));
+            else if(r==0 && c==cols-1 && probability()>1){
+                add_adj(&temp, id_w-1, gen_num(w_min,w_max));
+                add_adj(&temp, id_w + c, gen_num(w_min, w_max));
             }
-            if(r==rows-1 && c==0){
-                add_adj(&temp, id_w - c, gen_num(0, 10));
-                add_adj(&temp, id_w + 1, gen_num(0, 10));
+            else if(r==rows-1 && c==0 && probability()>1){
+                add_adj(&temp, id_w - c, gen_num(w_min, w_max));
+                add_adj(&temp, id_w + 1, gen_num(w_min, w_max));
             }
-            if(r==rows-1 && c==cols-1){
-                add_adj(&temp, id_w - c, gen_num(0, 10));
-                add_adj(&temp, id_w - 1, gen_num(0, 10));
+            else if(r==rows-1 && c==cols-1 && probability()>1){
+                add_adj(&temp, id_w - c, gen_num(w_min, w_max));
+                add_adj(&temp, id_w - 1, gen_num(w_min, w_max));
             }
-            if(r==0 && c!=0 && c!=cols-1){
-                add_adj(&temp, id_w + c, gen_num(0, 10));
-                add_adj(&temp, id_w - 1 , gen_num(0, 10));
-                add_adj(&temp, id_w + 1, gen_num(0, 10));
+            else if(r==0 && c!=0 && c!=cols-1 && probability()>1){
+                add_adj(&temp, id_w + c, gen_num(w_min, w_max));
+                add_adj(&temp, id_w - 1 , gen_num(w_min, w_max));
+                add_adj(&temp, id_w + 1, gen_num(w_min, w_max));
             }
-            if(r==rows-1 && c!=0 && c!=cols-1){
-                add_adj(&temp, id_w - c, gen_num(0, 10));
-                add_adj(&temp, id_w - 1 , gen_num(0, 10));
-                add_adj(&temp, id_w + 1, gen_num(0, 10));
+            else if(r==rows-1 && c!=0 && c!=cols-1 && probability()>1){
+                add_adj(&temp, id_w - c, gen_num(w_min, w_max));
+                add_adj(&temp, id_w - 1 , gen_num(w_min, w_max));
+                add_adj(&temp, id_w + 1, gen_num(w_min, w_max));
             }
-            if(r!=0 && r!=rows-1 && c==0){
-                add_adj(&temp, id_w + c, gen_num(0, 10));
-                add_adj(&temp, id_w - c , gen_num(0, 10));
-                add_adj(&temp, id_w + 1, gen_num(0, 10));
+            else if(r!=0 && r!=rows-1 && c==0 && probability()>1){
+                add_adj(&temp, id_w + c, gen_num(w_min, w_max));
+                add_adj(&temp, id_w - c , gen_num(w_min, w_max));
+                add_adj(&temp, id_w + 1, gen_num(w_min, w_max));
             }
-            if(r!=0 && r!=rows-1 && c==cols-1){
-                add_adj(&temp, id_w + c, gen_num(0, 10));
-                add_adj(&temp, id_w - c , gen_num(0, 10));
-                add_adj(&temp, id_w - 1, gen_num(0, 10));
+            else if(r!=0 && r!=rows-1 && c==cols-1 && probability()>1){
+                add_adj(&temp, id_w + c, gen_num(w_min, w_max));
+                add_adj(&temp, id_w - c , gen_num(w_min, w_max));
+                add_adj(&temp, id_w - 1, gen_num(w_min, w_max));
             }
-            if(r!=0 && r!=rows-1 && c!=0 && c!=cols-1){
-                add_adj(&temp, id_w + c, gen_num(0, 10));
-                add_adj(&temp, id_w - c , gen_num(0, 10));
-                add_adj(&temp, id_w + 1, gen_num(0, 10));
-                add_adj(&temp, id_w - 1, gen_num(0, 10));
+            else if(r!=0 && r!=rows-1 && c!=0 && c!=cols-1 && probability()>1){
+                add_adj(&temp, id_w + c, gen_num(w_min, w_max));
+                add_adj(&temp, id_w - c , gen_num(w_min, w_max));
+                add_adj(&temp, id_w + 1, gen_num(w_min, w_max));
+                add_adj(&temp, id_w - 1, gen_num(w_min, w_max));
             }
-
+            tablica[id_w].tab=&temp;
             id_w+=1;
 
 
         }
 
     }
+    return tablica;
 }
 

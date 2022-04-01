@@ -23,5 +23,7 @@ void add_s_to_tab(sciezka_t w, sciezka_tab tab){
 }
 
 sciezka_tab find(wierzcholek_tab tablica){
+
     return new_sciezka_tab();
 }
+

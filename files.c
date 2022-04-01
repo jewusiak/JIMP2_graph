@@ -20,20 +20,26 @@ wierzcholek_tab read_w(const char *filename) {
 
     fgetc(f);
 
-    char line[1024];
+    char line[2048];
     int line_no = 0;
 
     wierzcholek_tab graf_w = new_wierzcholek_tab_s(rows * cols);
 
 
-    while ((fscanf(f, "%[^\n]", line)) != EOF) {
+    while (fgets(line, 2048, f) != NULL) {
         fgetc(f);
 
         int id;
         double weight;
+
         int reslt;
         graf_w->tab[line_no] = new_wierzcholek_t(line_no);
-        while ((reslt = fscanf(f, " %d : %lf ", &id, &weight)) != EOF) {
+
+
+        int przes=0, przeczytane;
+
+        while ((reslt = sscanf(line+przes, " %d : %lf %n", &id, &weight, &przeczytane)) != EOF) {
+            przes+=przeczytane;
             if (reslt != 2) {
                 fprintf(stderr, "graph: Nieprawidlowy format pliku.\n");
                 exit(4);
@@ -62,5 +68,13 @@ wierzcholek_tab read_w(const char *filename) {
 
     fclose(f);
     return graf_w;
+
+}
+
+void write_w(wierzcholek_tab tablica, const char *filename){
+
+}
+
+void write_results(sciezka_tab s){
 
 }

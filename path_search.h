@@ -23,6 +23,7 @@ sciezka_tab new_sciezka_tab();
 
 void add_s_to_tab(sciezka_t w, sciezka_tab tab);
 
+
 sciezka_tab find(wierzcholek_tab tablica);
 
 #endif //JIMP2_GRAPH_PATH_SEARCH_H

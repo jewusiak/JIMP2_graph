@@ -106,3 +106,4 @@ wierzcholek_tab gen_graph(int rows, int cols, double w_min, double w_max){
 
     }
 }
+

@@ -30,5 +30,8 @@ void add_w_to_tab(wierzcholek_t w, wierzcholek_tab tab);
 //obsługa grafu
 wierzcholek_tab gen_graph(int rows, int cols, double w_min, double w_max);
 
+double gen_num(double l_num, double h_num);
+
+
 
 #endif //JIMP2_GRAPH_GRAPH_H

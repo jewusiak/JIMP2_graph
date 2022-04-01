@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #include "graph.h"
 
 
@@ -39,3 +40,69 @@ void add_w_to_tab(wierzcholek_t w, wierzcholek_tab tab) {
     tab->tab[tab->n - 1] = w;
 }
 
+double gen_num(double l_num, double h_num){
+    double r_num;
+    srand(time(NULL));
+    r_num=((double)rand()*(h_num-l_num)/RAND_MAX)+l_num;
+    return r_num;
+}
+
+wierzcholek_tab gen_graph(int rows, int cols, double w_min, double w_max){
+    int r;
+    int c;
+    int id_w=0;
+    for(r=0;r<rows;r++)
+    {
+        for(c=0;c<cols;c++)
+        {
+            wierzcholek_t temp= new_wierzcholek_t(id_w);
+            if(r==0 && c==0) {
+                add_adj(&temp, id_w + 1, gen_num(0, 10));
+                add_adj(&temp, id_w + c, gen_num(0, 10));
+            }
+            if(r==0 && c==cols-1){
+                add_adj(&temp, id_w-1, gen_num(0,10));
+                add_adj(&temp, id_w + c, gen_num(0, 10));
+            }
+            if(r==rows-1 && c==0){
+                add_adj(&temp, id_w - c, gen_num(0, 10));
+                add_adj(&temp, id_w + 1, gen_num(0, 10));
+            }
+            if(r==rows-1 && c==cols-1){
+                add_adj(&temp, id_w - c, gen_num(0, 10));
+                add_adj(&temp, id_w - 1, gen_num(0, 10));
+            }
+            if(r==0 && c!=0 && c!=cols-1){
+                add_adj(&temp, id_w + c, gen_num(0, 10));
+                add_adj(&temp, id_w - 1 , gen_num(0, 10));
+                add_adj(&temp, id_w + 1, gen_num(0, 10));
+            }
+            if(r==rows-1 && c!=0 && c!=cols-1){
+                add_adj(&temp, id_w - c, gen_num(0, 10));
+                add_adj(&temp, id_w - 1 , gen_num(0, 10));
+                add_adj(&temp, id_w + 1, gen_num(0, 10));
+            }
+            if(r!=0 && r!=rows-1 && c==0){
+                add_adj(&temp, id_w + c, gen_num(0, 10));
+                add_adj(&temp, id_w - c , gen_num(0, 10));
+                add_adj(&temp, id_w + 1, gen_num(0, 10));
+            }
+            if(r!=0 && r!=rows-1 && c==cols-1){
+                add_adj(&temp, id_w + c, gen_num(0, 10));
+                add_adj(&temp, id_w - c , gen_num(0, 10));
+                add_adj(&temp, id_w - 1, gen_num(0, 10));
+            }
+            if(r!=0 && r!=rows-1 && c!=0 && c!=cols-1){
+                add_adj(&temp, id_w + c, gen_num(0, 10));
+                add_adj(&temp, id_w - c , gen_num(0, 10));
+                add_adj(&temp, id_w + 1, gen_num(0, 10));
+                add_adj(&temp, id_w - 1, gen_num(0, 10));
+            }
+
+            id_w+=1;
+
+
+        }
+
+    }
+}

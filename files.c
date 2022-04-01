@@ -74,7 +74,3 @@ wierzcholek_tab read_w(const char *filename) {
 void write_w(wierzcholek_tab tablica, const char *filename){
 
 }
-
-void write_results(sciezka_tab s){
-
-}

@@ -4,26 +4,22 @@
 
 #include "graph.h"
 
-typedef struct{
-    int *ids;
+typedef struct {
+    int *seq;
     int n;
+    double length;
 } sciezka_t;
 
-typedef struct{
-    sciezka_t *sciezki;
-    int n;
-} * sciezka_tab;
 
 //obsługa struktur
-sciezka_t new_sciezka_t(int id);
+sciezka_t new_sciezka_t(double len);
 
-void add_to_sciezka(sciezka_t *s, int id) ;
+void add_to_sciezka(sciezka_t *s, int id);
 
-sciezka_tab new_sciezka_tab();
+sciezka_t find(wierzcholek_tab t, int from, int to);
 
-void add_s_to_tab(sciezka_t w, sciezka_tab tab);
+void reverse(sciezka_t *s);
 
-
-sciezka_tab find(wierzcholek_tab tablica);
+void print_sciezka(sciezka_t s);
 
 #endif //JIMP2_GRAPH_PATH_SEARCH_H

@@ -7,13 +7,18 @@
 #include "graph.h"
 #include "path_search.h"
 
+#define FILE_N src_argv_index==-1?"mygraph":argv[src_argv_index]
+
 int main(int argc, char **argv) {
 
-    int c, i, spojnosc = 0, dijks = 0, gen = 0, id_pocz = -1, id_konc = -1, rows = -1, cols = -1;
+    setbuf(stdout, NULL);
+    //TODO: usunąć to!!!
+
+
+    int c, i, spojnosc = 0, dijks = 0, gen = 0, id_pocz = -1, id_konc = -1, rows = -1, cols = -1, coherent=0;
     char *err = "";
     double min_w = 0, max_w = 10;
     int src_argv_index = -1;
-    const char *def_filename = "mygraph";
 
     puts(err);
 
@@ -26,7 +31,10 @@ int main(int argc, char **argv) {
         }
 
     for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-s") == 0 || strcmp(argv[i], "--spoj") == 0)
+        if (strcmp(argv[i], "-c") == 0)
+            coherent = 1;
+
+        else if (strcmp(argv[i], "-s") == 0 || strcmp(argv[i], "--spoj") == 0)
             spojnosc = 1;
 
         else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--path") == 0) {
@@ -104,18 +112,21 @@ int main(int argc, char **argv) {
 
     wierzcholek_tab graf;
 
-    if ((spojnosc || dijks) && !gen && src_argv_index != -1) {
+
+
+    if ((spojnosc || dijks) && !gen ) {
         //praca na grafie wczytanym (wczytujemy src)
-        graf = read_w(argv[src_argv_index]);
-    } else if (gen && src_argv_index != -1) {
+        graf = read_w(FILE_N);
+    } else if (gen ) {
         //praca na grafie (generujemy graf, zapisujemy do src, pracujemy na nim)
-        graf = gen_graph(rows, cols, min_w, max_w);
-        write_w(graf, argv[src_argv_index]);
+        graf = gen_graph(rows, cols, min_w, max_w, coherent);
+        write_w(graf, FILE_N);
 
     } else {
         fprintf(stderr, "graph: Nieprawidlowo zdefiniowany tryb pracy. Za malo argumentow.");
         return 8;
     }
+
 
     int czy_spojny = BFS(graf);
 
@@ -128,7 +139,7 @@ int main(int argc, char **argv) {
     }
 
     if (dijks)
-        write_results(find(graf));
+        print_sciezka(find(graf, id_pocz, id_konc));
 
 
 

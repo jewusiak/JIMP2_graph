@@ -45,7 +45,8 @@ int BFS(wierzcholek_tab tab) {
     for(i=0;i<tab->n;i++)
         if(visited[i]==0) {
             is_coherent = 0;
-            printf("Nieodwiedzony: %d\n", i);
+            printf("Nieodwiedzony: %d", i);
+            printf(" - %d\n",tab->tab[i].n);
         }
 
     return is_coherent;

@@ -88,3 +88,4 @@ void write_w(wierzcholek_tab tablica, const char *filename){
 
 }
 
+

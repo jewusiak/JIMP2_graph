@@ -107,7 +107,7 @@ wierzcholek_tab gen_graph(int rows, int cols, double w_min, double w_max){
                 add_adj(&temp, id_w + 1, gen_num(w_min, w_max));
                 add_adj(&temp, id_w - 1, gen_num(w_min, w_max));
             }
-            tablica[id_w].tab=&temp;
+            tablica->tab[id_w]=temp;
             id_w+=1;
 
 

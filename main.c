@@ -22,9 +22,8 @@ int main(int argc, char **argv) {
 
     if (argc > 1)
         if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0) {
-            //TODO: implementacja helpa
 
-            printf("Zaimplementować helpa\n");
+            printf("Zapraszam do specyfikacji :)\n");
             return 0;
         }
 

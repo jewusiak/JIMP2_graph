@@ -11,8 +11,6 @@
 
 int main(int argc, char **argv) {
 
-    setbuf(stdout, NULL);
-    //TODO: usunąć to!!!
 
 
     int c, i, spojnosc = 0, dijks = 0, gen = 0, id_pocz = -1, id_konc = -1, rows = -1, cols = -1, coherent=0;

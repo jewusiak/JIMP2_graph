@@ -73,4 +73,19 @@ wierzcholek_tab read_w(const char *filename) {
 
 void write_w(wierzcholek_tab tablica, const char *filename){
 
+    FILE *fp;
+    fp=fopen(filename,"w");
+    int w=0;
+    int s=0;
+    for(w=0;w<tablica->n;w++)
+    {
+        for(s=0;s<tablica->tab[w].n;s++)
+        {
+            fprintf(fp,"%d :%f ", tablica->tab[w].adj[s],tablica->tab[w].adj_weights[s]);
+        }
+            fprintf(fp,"\n");
+    }
+
 }
+
+

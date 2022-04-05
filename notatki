@@ -2,4 +2,5 @@
 - dopisać do sprawozdania że zmianiamy sposób czytania z pliku
 - sposób wywołania: -p <id_pocz> <id_konc> lub --path <id_pocz> <id_konc> - szukanie ścieżki
 - parametr -w <min> <max>
+- parametr -c wymusza spójnośc grafu
 - 7 i 8 exit-cody do sprawka

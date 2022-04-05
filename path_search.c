@@ -43,6 +43,10 @@ void print_sciezka(sciezka_t s) {
 }
 
 sciezka_t find(wierzcholek_tab t, int from, int to) {
+    if(from<0 || to>=t->n){
+        fprintf(stderr, "graph: Nieprawidlowo zdefiniowane parametry po -p lub --path.\n0 >= x < l. wierzcholkow\n");
+        exit(3);
+    }
     int *sq = calloc(t->n, sizeof *sq);
     int nq = t->n;
     // 0 - NIE należy do S, NALEŻY do Q

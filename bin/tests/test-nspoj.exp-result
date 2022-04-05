@@ -1,0 +1,4 @@
+graph: Do poprawnego dzialania algorytmu Dijkstry wymagana jest spojnosc grafu.
+
+Nieodwiedzony: 89 - 2
+Test spojnosci: NIE

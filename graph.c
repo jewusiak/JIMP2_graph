@@ -59,50 +59,52 @@ wierzcholek_tab gen_graph(int rows, int cols, double w_min, double w_max, int co
     int r;
     int c;
     int id_w = 0;
+    int limit = 3;
     wierzcholek_tab tablica = new_wierzcholek_tab_s(rows * cols);
     for (r = 0; r < rows; r++) {
         for (c = 0; c < cols; c++) {
             wierzcholek_t temp = new_wierzcholek_t(id_w);
-            int val = coherent == 1 ? 2 : probability();
+
+            int val = coherent == 1 ? limit + 1 : probability();
 
 
-            if (r == 0 && c == 0 && val > 0) {
+            if (r == 0 && c == 0 && val > limit) {
                 add_adj(&temp, id_w + 1, gen_num(w_min, w_max));
                 add_adj(&temp, id_w + c, gen_num(w_min, w_max));
             }
-            if (r == 0 && c == cols - 1 && val > 0) {
+            if (r == 0 && c == cols - 1 && val > limit) {
                 add_adj(&temp, id_w - 1, gen_num(w_min, w_max));
                 add_adj(&temp, id_w + c, gen_num(w_min, w_max));
             }
-            if (r == rows - 1 && c == 0 && val > 0) {
+            if (r == rows - 1 && c == 0 && val > limit) {
                 add_adj(&temp, id_w - c, gen_num(w_min, w_max));
                 add_adj(&temp, id_w + 1, gen_num(w_min, w_max));
             }
-            if (r == rows - 1 && c == cols - 1 && val > 0) {
+            if (r == rows - 1 && c == cols - 1 && val > limit) {
                 add_adj(&temp, id_w - c, gen_num(w_min, w_max));
                 add_adj(&temp, id_w - 1, gen_num(w_min, w_max));
             }
-            if (r == 0 && c != 0 && c != cols - 1 && val > 0) {
+            if (r == 0 && c != 0 && c != cols - 1 && val > limit) {
                 add_adj(&temp, id_w + c, gen_num(w_min, w_max));
                 add_adj(&temp, id_w - 1, gen_num(w_min, w_max));
                 add_adj(&temp, id_w + 1, gen_num(w_min, w_max));
             }
-            if (r == rows - 1 && c != 0 && c != cols - 1 && val > 0) {
+            if (r == rows - 1 && c != 0 && c != cols - 1 && val > limit) {
                 add_adj(&temp, id_w - c, gen_num(w_min, w_max));
                 add_adj(&temp, id_w - 1, gen_num(w_min, w_max));
                 add_adj(&temp, id_w + 1, gen_num(w_min, w_max));
             }
-            if (r != 0 && r != rows - 1 && c == 0 && val > 0) {
+            if (r != 0 && r != rows - 1 && c == 0 && val > limit) {
                 add_adj(&temp, id_w + c, gen_num(w_min, w_max));
                 add_adj(&temp, id_w - c, gen_num(w_min, w_max));
                 add_adj(&temp, id_w + 1, gen_num(w_min, w_max));
             }
-            if (r != 0 && r != rows - 1 && c == cols - 1 && val > 0) {
+            if (r != 0 && r != rows - 1 && c == cols - 1 && val > limit) {
                 add_adj(&temp, id_w + c, gen_num(w_min, w_max));
                 add_adj(&temp, id_w - c, gen_num(w_min, w_max));
                 add_adj(&temp, id_w - 1, gen_num(w_min, w_max));
             }
-            if (r != 0 && r != rows - 1 && c != 0 && c != cols - 1 && val > 0) {
+            if (r != 0 && r != rows - 1 && c != 0 && c != cols - 1 && (coherent != 1 ? (val / 10) : val > limit)) {
                 add_adj(&temp, id_w + c, gen_num(w_min, w_max));
                 add_adj(&temp, id_w - c, gen_num(w_min, w_max));
                 add_adj(&temp, id_w + 1, gen_num(w_min, w_max));

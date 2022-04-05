@@ -3,7 +3,7 @@ CC=gcc
 OBS=files.c BFS.c graph.c main.c path_search.c utils.c
 
 build: bindir
-	$(CC) $(OBS) -Wall --pedantic -ansi -obin/graph
+	$(CC) $(OBS) --std=c90 -obin/graph
 
 bindir:
 	@mkdir -p bin

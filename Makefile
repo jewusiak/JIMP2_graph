@@ -19,9 +19,9 @@ test-spoj: build testdir
 	@res=$$(diff bin/tests/test-spoj.exp-result bin/tests/test-spoj.result);\
 	if [ -z "$$res" ];\
 		then\
-		  echo "Test test-spoj: OK";\
+		  echo "--> graph: Test test-spoj: OK";\
 		else\
-		  echo "Test test-spoj: BLAD!  Szczegoly:";\
+		  echo "--> graph: Test test-spoj: BLAD!  Szczegoly:";\
 		  echo $$res ;\
 		fi\
 
@@ -30,9 +30,9 @@ test-nspoj: build testdir
 	@res=$$(diff bin/tests/test-nspoj.exp-result bin/tests/test-nspoj.result);\
 	if [ -z "$$res" ];\
 		then\
-		  echo "Test test-nspoj: OK";\
+		  echo "--> graph: Test test-nspoj: OK";\
 		else\
-		  echo "Test test-nspoj: BLAD!  Szczegoly:";\
+		  echo "--> graph: Test test-nspoj: BLAD!  Szczegoly:";\
 		  echo $$res ;\
 		fi\
 
@@ -41,9 +41,9 @@ test-ujemny: build testdir
 	@res=$$(diff bin/tests/test-ujemny.exp-result bin/tests/test-ujemny.result);\
 	if [ -z "$$res" ];\
 		then\
-		  echo "Test test-ujemny: OK";\
+		  echo "--> graph: Test test-ujemny: OK";\
 		else\
-		  echo "Test test-ujemny: BLAD!  Szczegoly:";\
+		  echo "--> graph: Test test-ujemny: BLAD!  Szczegoly:";\
 		  echo $$res ;\
 		fi\
 
@@ -52,9 +52,9 @@ test-format: build testdir
 	@res=$$(diff bin/tests/test-format.exp-result bin/tests/test-format.result);\
 	if [ -z "$$res" ];\
 		then\
-		  echo "Test test-format: OK";\
+		  echo "--> graph: Test test-format: OK";\
 		else\
-		  echo "Test test-format: BLAD!  Szczegoly:";\
+		  echo "--> graph: Test test-format: BLAD!  Szczegoly:";\
 		  echo $$res ;\
 		fi\
 

@@ -4,7 +4,7 @@
 
 
 sciezka_t new_sciezka_t(double len) {
-    return (sciezka_t) {.length=len,  .n=0, .seq=malloc(sizeof(int))};
+    return (sciezka_t) {.length=len, .n=0, .seq=malloc(sizeof(int))};
 }
 
 void add_to_sciezka(sciezka_t *s, int id) {
@@ -34,10 +34,10 @@ void reverse(sciezka_t *s) {
     }
 }
 
-void print_sciezka(sciezka_t s){
+void print_sciezka(sciezka_t s) {
     int i;
     printf("Dlugosc: %g\n", s.length);
-    for(i=0;i<s.n-1;i++)
+    for (i = 0; i < s.n - 1; i++)
         printf("%d >> ", s.seq[i]);
     printf("%d", s.seq[i]);
 }
@@ -75,11 +75,11 @@ sciezka_t find(wierzcholek_tab t, int from, int to) {
 
     }
 
-    sciezka_t out= new_sciezka_t( d[to]);
-    int last=to;
-    while(last!=-1){
-        add_to_sciezka(&out,last);
-        last=p[last];
+    sciezka_t out = new_sciezka_t(d[to]);
+    int last = to;
+    while (last != -1) {
+        add_to_sciezka(&out, last);
+        last = p[last];
     }
 
     reverse(&out);

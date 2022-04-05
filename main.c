@@ -7,13 +7,11 @@
 #include "graph.h"
 #include "path_search.h"
 
-#define FILE_N src_argv_index==-1?"mygraph":argv[src_argv_index]
 
 int main(int argc, char **argv) {
 
 
-
-    int c, i, spojnosc = 0, dijks = 0, gen = 0, id_pocz = -1, id_konc = -1, rows = -1, cols = -1, coherent=0;
+    int i, spojnosc = 0, dijks = 0, gen = 0, id_pocz = -1, id_konc = -1, rows = -1, cols = -1, coherent = 0;
     char *err = "";
     double min_w = 0, max_w = 10;
     int src_argv_index = -1;
@@ -109,15 +107,15 @@ int main(int argc, char **argv) {
 
     wierzcholek_tab graf;
 
+    const char *fn = src_argv_index == -1 ? "mygraph" : argv[src_argv_index];
 
-
-    if ((spojnosc || dijks) && !gen ) {
+    if ((spojnosc || dijks) && !gen) {
         //praca na grafie wczytanym (wczytujemy src)
-        graf = read_w(FILE_N);
-    } else if (gen ) {
+        graf = read_w(fn);
+    } else if (gen) {
         //praca na grafie (generujemy graf, zapisujemy do src, pracujemy na nim)
         graf = gen_graph(rows, cols, min_w, max_w, coherent);
-        write_w(graf, FILE_N);
+        write_w(graf, rows, cols, fn);
 
     } else {
         fprintf(stderr, "graph: Nieprawidlowo zdefiniowany tryb pracy. Za malo argumentow.");
@@ -137,8 +135,6 @@ int main(int argc, char **argv) {
 
     if (dijks)
         print_sciezka(find(graf, id_pocz, id_konc));
-
-
 
 
 }

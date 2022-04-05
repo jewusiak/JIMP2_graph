@@ -27,26 +27,26 @@ int BFS(wierzcholek_tab tab) {
     kolejka_t q = new_kolejka_t();
     int *visited = calloc(tab->n, sizeof *visited);
     visited[0] = 1;
-    q_push(&q,0);
+    q_push(&q, 0);
     while (!q_empty(&q)) {
         int v = q_pop(&q);
         int i = 0;
         for (; i < tab->tab[v].n; i++) {
-            if(visited[tab->tab[v].adj[i]]==1)
+            if (visited[tab->tab[v].adj[i]] == 1)
                 continue;
-            q_push(&q,tab->tab[v].adj[i]);
-            visited[tab->tab[v].adj[i]]=1;
+            q_push(&q, tab->tab[v].adj[i]);
+            visited[tab->tab[v].adj[i]] = 1;
         }
 
     }
 
-    int is_coherent=1;
+    int is_coherent = 1;
     int i;
-    for(i=0;i<tab->n;i++)
-        if(visited[i]==0) {
+    for (i = 0; i < tab->n; i++)
+        if (visited[i] == 0) {
             is_coherent = 0;
             printf("Nieodwiedzony: %d", i);
-            printf(" - %d\n",tab->tab[i].n);
+            printf(" - %d\n", tab->tab[i].n);
         }
 
     return is_coherent;

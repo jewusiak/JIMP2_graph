@@ -27,7 +27,7 @@ wierzcholek_tab read_w(const char *filename) {
 
 
     while (fgets(line, 2048, f) != NULL) {
-        fgetc(f);
+
 
         int id;
         double weight;
@@ -36,10 +36,10 @@ wierzcholek_tab read_w(const char *filename) {
         graf_w->tab[line_no] = new_wierzcholek_t(line_no);
 
 
-        int przes=0, przeczytane;
+        int przes = 0, przeczytane;
 
-        while ((reslt = sscanf(line+przes, " %d : %lf %n", &id, &weight, &przeczytane)) != EOF) {
-            przes+=przeczytane;
+        while ((reslt = sscanf(line + przes, " %d : %lf %n", &id, &weight, &przeczytane)) != EOF) {
+            przes += przeczytane;
             if (reslt != 2) {
                 fprintf(stderr, "graph: Nieprawidlowy format pliku.\n");
                 exit(4);
@@ -65,25 +65,27 @@ wierzcholek_tab read_w(const char *filename) {
     }
 
 
-
     fclose(f);
     return graf_w;
 
 }
 
-void write_w(wierzcholek_tab tablica, const char *filename){
+void write_w(wierzcholek_tab tablica, int rows, int cols, const char *filename) {
 
     FILE *fp;
-    fp=fopen(filename,"w");
-    int w=0;
-    int s=0;
-    for(w=0;w<tablica->n;w++)
-    {
-        for(s=0;s<tablica->tab[w].n;s++)
-        {
-            fprintf(fp,"%d :%f ", tablica->tab[w].adj[s],tablica->tab[w].adj_weights[s]);
+    fp = fopen(filename, "w");
+    if (fp == NULL) {
+        fprintf(stderr, "graph: Nie udalo sie otworzyc pliku %s (write).\n", filename);
+        exit(6);
+    }
+    int w = 0;
+    int s = 0;
+    fprintf(fp, "%d %d\n", rows, cols);
+    for (w = 0; w < tablica->n; w++) {
+        for (s = 0; s < tablica->tab[w].n; s++) {
+            fprintf(fp, "%d :%f ", tablica->tab[w].adj[s], tablica->tab[w].adj_weights[s]);
         }
-            fprintf(fp,"\n");
+        fprintf(fp, "\n");
     }
 
 }

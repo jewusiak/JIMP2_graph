@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
             spojnosc = 1;
 
         else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--path") == 0) {
-            //szukamy id_pocz, id_konc
+
             if (i + 2 >= argc) {
                 err = "Nieprawidlowo zdefiniowane wartosci id_pocz i id_konc jako kolejne parametry po -p lub --path";
                 break;
@@ -43,7 +43,6 @@ int main(int argc, char **argv) {
                 dijks = 1;
                 id_pocz = atoi(argv[++i]);
                 id_konc = atoi(argv[++i]);
-                //wymuszenie spójności
                 spojnosc = 1;
 
 
@@ -102,7 +101,7 @@ int main(int argc, char **argv) {
 
     if (strcmp(err, "") != 0) {
         fprintf(stderr, "graph: %s\n", err);
-        return 8; //TODO: exit-code do sprawozdania
+        return 8;
     }
 
     wierzcholek_tab graf;
@@ -110,10 +109,8 @@ int main(int argc, char **argv) {
     const char *fn = src_argv_index == -1 ? "mygraph" : argv[src_argv_index];
 
     if ((spojnosc || dijks) && !gen) {
-        //praca na grafie wczytanym (wczytujemy src)
         graf = read_w(fn);
     } else if (gen) {
-        //praca na grafie (generujemy graf, zapisujemy do src, pracujemy na nim)
         graf = gen_graph(rows, cols, min_w, max_w, coherent);
         write_w(graf, rows, cols, fn);
 

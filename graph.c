@@ -24,7 +24,6 @@ wierzcholek_tab new_wierzcholek_tab() {
     return t;
 }
 
-//tworzy instancje wierzchołków w tablicy
 wierzcholek_tab new_wierzcholek_tab_s(int size) {
     wierzcholek_tab t = malloc(sizeof *t);
     t->n = size;

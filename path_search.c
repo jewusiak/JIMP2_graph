@@ -49,8 +49,6 @@ sciezka_t find(wierzcholek_tab t, int from, int to) {
     }
     int *sq = calloc(t->n, sizeof *sq);
     int nq = t->n;
-    // 0 - NIE należy do S, NALEŻY do Q
-    // 1 - NALEŻY do S, NIE należy do Q
     int *p = malloc(t->n * sizeof *p);
     double *d = malloc(t->n * sizeof *d);
     int i;

@@ -3,7 +3,7 @@
 
 #include "graph.h"
 
-//kolejka:
+/*kolejka:*/
 typedef struct {
     int *q;
     int n;
@@ -24,4 +24,4 @@ int q_empty(kolejka_t *k);
 int BFS(wierzcholek_tab tab);
 
 
-#endif //JIMP2_GRAPH_BFS_H
+#endif

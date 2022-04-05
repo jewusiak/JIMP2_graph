@@ -1,4 +1,4 @@
-//To jest moduł algorytmu Dijkstry
+
 #ifndef JIMP2_GRAPH_PATH_SEARCH_H
 #define JIMP2_GRAPH_PATH_SEARCH_H
 
@@ -11,7 +11,6 @@ typedef struct {
 } sciezka_t;
 
 
-//obsługa struktur
 sciezka_t new_sciezka_t(double len);
 
 void add_to_sciezka(sciezka_t *s, int id);
@@ -22,4 +21,4 @@ void reverse(sciezka_t *s);
 
 void print_sciezka(sciezka_t s);
 
-#endif //JIMP2_GRAPH_PATH_SEARCH_H
+#endif

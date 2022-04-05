@@ -1,6 +1,3 @@
-//
-// Created by Grzegorz Jewusiak on 30/03/2022.
-//
 
 #include <string.h>
 #include <ctype.h>

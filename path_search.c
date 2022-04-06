@@ -39,7 +39,7 @@ void print_sciezka(sciezka_t s) {
     printf("Dlugosc: %g\n", s.length);
     for (i = 0; i < s.n - 1; i++)
         printf("%d >> ", s.seq[i]);
-    printf("%d", s.seq[i]);
+    printf("%d\n", s.seq[i]);
 }
 
 sciezka_t find(wierzcholek_tab t, int from, int to) {
